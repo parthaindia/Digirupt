@@ -8,11 +8,8 @@ package com.digirupt.services;
 import com.digirupt.manager.BillManager;
 import com.digirupt.util.Constants;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Partha
  */
-public class GenerateBill extends HttpServlet {
+public class GetAllBill extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,17 +32,10 @@ public class GenerateBill extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
+          PrintWriter out = response.getWriter();
         try {
-
-            String json = request.getParameter("json");
-            String category = request.getParameter("category");
-           
-           
-            Map<String,String> itemList = new Gson().fromJson(json, new TypeToken<HashMap<String,String>>() {
-            }.getType());
-
-            String result = new BillManager().createBillIdBased(itemList, category);
+  
+            String result = new BillManager().getAllBillIds();
 
             if (result != null && !result.isEmpty()) {
                 request.setAttribute("statuscode", Constants.HTTP_STATUS_SUCCESS);
@@ -57,7 +47,7 @@ public class GenerateBill extends HttpServlet {
             }
         } catch (Exception ex) {
             System.out.println("Exception::::" + ex);
-           out.write(Constants.HTTP_STATUS_EXCEPTION +" Exception::::" + ex);
+            out.write(Constants.HTTP_STATUS_EXCEPTION +" Exception::::" + ex);
 
         } finally {
             out.close();

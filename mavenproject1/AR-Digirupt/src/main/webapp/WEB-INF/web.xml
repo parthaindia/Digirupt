@@ -20,6 +20,10 @@
         <servlet-name>GetItem</servlet-name>
         <servlet-class>com.digirupt.services.GetItem</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>GetAllBill</servlet-name>
+        <servlet-class>com.digirupt.services.GetAllBill</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CreateItem</servlet-name>
         <url-pattern>/CreateItem</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>GetItem</servlet-name>
         <url-pattern>/GetItem</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GetAllBill</servlet-name>
+        <url-pattern>/GetAllBill</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
