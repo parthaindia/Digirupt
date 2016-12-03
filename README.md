@@ -9,6 +9,7 @@ http://localhost:8080/AR-backend/index.html
 This will give you Hello World!
 
 Tom is up and running if we get this message
+Switch on the mongod.exe and mongo.exe , with the default port , in case to change the port change the port in the Constant file in java code as well
 --------------------------------------------------------------------
 
 Create item
