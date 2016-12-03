@@ -6,9 +6,9 @@ try the below url
 
 http://localhost:8080/AR-backend/index.html
 
+This will give you Hello World!
 
 Tom is up and running if we get this message
-This will give you Hello World!
 --------------------------------------------------------------------
 
 Create item
@@ -40,7 +40,9 @@ http://localhost:8080/AR-Digirupt/GetAllItems
 ----------------------------------------------------------------------
 to generate bill
 
-http://localhost:8080/AR-Digirupt/GenerateBill?json= ?category=basic
+http://localhost:8080/AR-Digirupt/GenerateBill?json={\"5841c3c5da9c37c320d4fac3\":\"1\",\"5841c3c5da9c37c320d4fac\":\"1\"}?category=basic
+
+note:an actual json is sent the url wont work without a postman or a rest call
 
 {"5841c3c5da9c37c320d4fac3":"1"
 "5841c3c5da9c37c320d4fac":"2"}
