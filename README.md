@@ -1,6 +1,3 @@
-# Digirupt
-
-
 Download the war file
 go to apache-tomcat-8.5.8  paste the war in webapps folder
 go to bin folder startup.bat
@@ -9,9 +6,9 @@ try the below url
 
 http://localhost:8080/AR-backend/index.html
 
-This will give you Hello World!
 
 Tom is up and running if we get this message
+This will give you Hello World!
 --------------------------------------------------------------------
 
 Create item
@@ -48,7 +45,8 @@ http://localhost:8080/AR-Digirupt/GenerateBill?json= ?category=basic
 {"5841c3c5da9c37c320d4fac3":"1"
 "5841c3c5da9c37c320d4fac":"2"}
 
-json example
+json must have a map with key being the item id and value being the number of items 
+
 
 json
 category
