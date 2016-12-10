@@ -32,10 +32,10 @@ public class GetAllItems extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    response.setContentType("text/json;charset=UTF-8");
+        response.setContentType("text/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-  
+
             String result = new BillManager().getAllItem();
 
             if (result != null && !result.isEmpty()) {
@@ -48,7 +48,7 @@ public class GetAllItems extends HttpServlet {
             }
         } catch (Exception ex) {
             System.out.println("Exception::::" + ex);
-            out.write(Constants.HTTP_STATUS_EXCEPTION +" Exception::::" + ex);
+            out.write(Constants.HTTP_STATUS_EXCEPTION + " Exception::::" + ex);
 
         } finally {
             out.close();

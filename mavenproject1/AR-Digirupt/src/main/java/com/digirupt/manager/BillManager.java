@@ -6,6 +6,7 @@ import com.digirupt.util.Constants;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -35,8 +36,41 @@ public class BillManager {
         }
         return DBManager.getDB().getByKey(Constants.ITEM_TABLE, id);
     }
-      public String getAllItem() throws Exception {
+
+    public String getItem(String id, String custom) throws Exception {
+        if (id == null || id.equals("") || custom == null || custom.equals("")) {
+            return null;
+        }
+        String ary[] = custom.split(",");
+      
         
+        
+        String resultJson = DBManager.getDB().getByKey(Constants.ITEM_TABLE, id);
+        List<Map> itemList = new Gson().fromJson(resultJson, new TypeToken<List<Map>>() {
+        }.getType());
+
+        
+        Map<Object, String> itemmap = (Map<Object, String>) itemList.get(0);
+       return customJson(ary,itemmap);
+    }
+
+    public String customJson(String[] ar, Map<Object, String> inputMap) {
+        if (ar == null || ar.length == 0 || inputMap == null || inputMap.isEmpty()) {
+            return null;
+        }
+        Map<String, String> resultMap = new HashMap<String, String>();
+        for (String st : ar) {
+            if (inputMap.containsKey(st)) {
+                resultMap.put(st, inputMap.get(st));
+            }
+        }
+        return new Gson().toJson(resultMap, new TypeToken<Map>() {
+        }.getType());
+
+    }
+
+    public String getAllItem() throws Exception {
+
         return DBManager.getDB().getAll(Constants.ITEM_TABLE);
     }
 
@@ -63,14 +97,14 @@ public class BillManager {
         return DBManager.getDB().getAll(Constants.BILL_TABLE);
     }
 
-    public String createBillIdBased(Map<String,String > itemMap ,String category) throws Exception {
+    public String createBillIdBased(Map<String, String> itemMap, String category) throws Exception {
         if (itemMap == null || itemMap.isEmpty()) {
             return null;
         }
         String json = "";
-        
-        List<Item> actualItemList=new ArrayList();
-       Set<String> itemIdsSet= itemMap.keySet();
+
+        List<Item> actualItemList = new ArrayList();
+        Set<String> itemIdsSet = itemMap.keySet();
         for (String it : itemIdsSet) {
             json = DBManager.getDB().getByKey("item", it);
             System.out.println(json);
@@ -79,14 +113,13 @@ public class BillManager {
             itemList.get(0).setPrice(itemMap.get(it));
             actualItemList.addAll(itemList);
         }
-        Bill bill=new Bill();
+        Bill bill = new Bill();
         bill.setCategotry(category);
         bill.setItemList(actualItemList);
-            return   DBManager.getDB().addDefault(Constants.BILL_TABLE,new Gson().toJson(bill, new TypeToken<Bill>() {
-            }.getType()));
+        return DBManager.getDB().addDefault(Constants.BILL_TABLE, new Gson().toJson(bill, new TypeToken<Bill>() {
+        }.getType()));
     }
-    
-    
+
 //    public String setEnv() throws Exception{
 //        //        String json = new Gson().toJson(map, new TypeToken<Map<String, String>>() {
 ////        }.getType());

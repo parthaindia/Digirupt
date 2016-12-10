@@ -48,7 +48,7 @@ public class GetBill extends HttpServlet {
             }
         } catch (Exception ex) {
             System.out.println("Exception::::" + ex);
-            out.write(Constants.HTTP_STATUS_EXCEPTION +" Exception::::" + ex);
+            out.write(Constants.HTTP_STATUS_EXCEPTION + " Exception::::" + ex);
 
         } finally {
             out.close();

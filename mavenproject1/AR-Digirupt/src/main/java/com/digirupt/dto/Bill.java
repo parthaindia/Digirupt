@@ -12,13 +12,14 @@ import java.util.List;
  * @author Partha
  */
 public class Bill {
+
     private Object _id;
     private String name;
     private String status;
     private String createdate;
-    private String updatedate; 
-    private  List<Item> itemList;
-    private String categotry ;
+    private String updatedate;
+    private List<Item> itemList;
+    private String categotry;
 
     public Object getId() {
         return _id;
@@ -75,6 +76,5 @@ public class Bill {
     public void setCategotry(String categotry) {
         this.categotry = categotry;
     }
-    
-    
+
 }

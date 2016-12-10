@@ -40,9 +40,8 @@ public class GenerateBill extends HttpServlet {
 
             String json = request.getParameter("json");
             String category = request.getParameter("category");
-           
-           
-            Map<String,String> itemList = new Gson().fromJson(json, new TypeToken<HashMap<String,String>>() {
+
+            Map<String, String> itemList = new Gson().fromJson(json, new TypeToken<HashMap<String, String>>() {
             }.getType());
 
             String result = new BillManager().createBillIdBased(itemList, category);
@@ -57,7 +56,7 @@ public class GenerateBill extends HttpServlet {
             }
         } catch (Exception ex) {
             System.out.println("Exception::::" + ex);
-           out.write(Constants.HTTP_STATUS_EXCEPTION +" Exception::::" + ex);
+            out.write(Constants.HTTP_STATUS_EXCEPTION + " Exception::::" + ex);
 
         } finally {
             out.close();

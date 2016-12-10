@@ -10,5 +10,5 @@ package com.digirupt.manager;
  * @author Partha
  */
 public class ItemLocator {
-    
+
 }

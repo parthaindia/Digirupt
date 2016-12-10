@@ -32,9 +32,9 @@ public class GetAllBill extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-          PrintWriter out = response.getWriter();
+        PrintWriter out = response.getWriter();
         try {
-  
+
             String result = new BillManager().getAllBillIds();
 
             if (result != null && !result.isEmpty()) {
@@ -47,7 +47,7 @@ public class GetAllBill extends HttpServlet {
             }
         } catch (Exception ex) {
             System.out.println("Exception::::" + ex);
-            out.write(Constants.HTTP_STATUS_EXCEPTION +" Exception::::" + ex);
+            out.write(Constants.HTTP_STATUS_EXCEPTION + " Exception::::" + ex);
 
         } finally {
             out.close();

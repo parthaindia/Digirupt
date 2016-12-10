@@ -1,4 +1,3 @@
-
 package com.digirupt.services;
 
 import com.digirupt.manager.BillManager;
@@ -23,7 +22,13 @@ public class GetItem extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             String id = request.getParameter("id");
-            String result = new BillManager().getItem(id);
+            String custom = request.getParameter("custom");
+            String result = "";// new BillManager().getItem(id);
+            if (custom != null && !custom.isEmpty()) {
+              result =  new BillManager().getItem(id, custom);
+            } else {
+                result = new BillManager().getItem(id);
+            }
 
             if (result != null && !result.isEmpty()) {
                 request.setAttribute("statuscode", Constants.HTTP_STATUS_SUCCESS);
@@ -35,7 +40,7 @@ public class GetItem extends HttpServlet {
             }
         } catch (Exception ex) {
             System.out.println("Exception::::" + ex);
-             out.write(Constants.HTTP_STATUS_EXCEPTION +" Exception::::" + ex);
+            out.write(Constants.HTTP_STATUS_EXCEPTION + " Exception::::" + ex);
 
         } finally {
             out.close();

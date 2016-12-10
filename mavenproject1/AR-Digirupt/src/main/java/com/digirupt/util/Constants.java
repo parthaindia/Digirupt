@@ -44,6 +44,4 @@ public interface Constants {
     public static final String ITEM_TABLE = "item";
     public static final String BILL_TABLE = "bill";
 
-   
-
 }

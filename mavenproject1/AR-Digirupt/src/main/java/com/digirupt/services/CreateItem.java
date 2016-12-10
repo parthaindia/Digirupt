@@ -5,7 +5,6 @@
  */
 package com.digirupt.services;
 
-
 import com.digirupt.manager.BillManager;
 import com.digirupt.util.Constants;
 import com.google.gson.Gson;
@@ -33,13 +32,13 @@ public class CreateItem extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      response.setContentType("text/json;charset=UTF-8");
+        response.setContentType("text/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
             String name = request.getParameter("name");
             String price = request.getParameter("price");
             String category = request.getParameter("category");
-             String result =new BillManager().saveItem(price, name, category);
+            String result = new BillManager().saveItem(price, name, category);
 
             if (result != null && !result.isEmpty()) {
                 request.setAttribute("statuscode", Constants.HTTP_STATUS_SUCCESS);
@@ -51,7 +50,7 @@ public class CreateItem extends HttpServlet {
             }
         } catch (Exception ex) {
             System.out.println("Exception::::" + ex);
-            out.write(Constants.HTTP_STATUS_EXCEPTION +" Exception::::" + ex);
+            out.write(Constants.HTTP_STATUS_EXCEPTION + " Exception::::" + ex);
 
         } finally {
             out.close();

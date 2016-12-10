@@ -10,14 +10,14 @@ package com.digirupt.dto;
  * @author Partha
  */
 public class Item {
-    
+
     private Object _id;
     private String name;
     private String status;
     private String createdate;
-    private String updatedate; 
+    private String updatedate;
     private String price;
-    private String categotry ;
+    private String categotry;
 
     public Object getId() {
         return _id;
@@ -74,5 +74,5 @@ public class Item {
     public void setCategotry(String categotry) {
         this.categotry = categotry;
     }
-    
+
 }
