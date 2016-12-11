@@ -33,14 +33,21 @@ public class GetBill extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/json;charset=UTF-8");
+        
         PrintWriter out = response.getWriter();
         try {
             String id = request.getParameter("id");
-            String result = new BillManager().getBill(id);
+            String custom = request.getParameter("custom");
+            String result = "";
+            if (custom != null && !custom.isEmpty()) {
+                result = new BillManager().getItem(id, custom);
+            } else {
+                result = new BillManager().getBill(id);
+            }
 
             if (result != null && !result.isEmpty()) {
                 request.setAttribute("statuscode", Constants.HTTP_STATUS_SUCCESS);
-                out.write(new Gson().toJson(result));
+                out.write(result);
 
             } else {
                 request.setAttribute("statuscode", Constants.HTTP_STATUS_FAIL);

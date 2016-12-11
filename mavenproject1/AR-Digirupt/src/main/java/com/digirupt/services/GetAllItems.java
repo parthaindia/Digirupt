@@ -35,12 +35,19 @@ public class GetAllItems extends HttpServlet {
         response.setContentType("text/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
         try {
-
-            String result = new BillManager().getAllItem();
+             
+            String custom=request.getParameter("custom");
+            String result="";
+            if(custom!=null&&!custom.equals("")){
+                result = new BillManager().getAllItem(custom);
+            }else{
+                result = new BillManager().getAllItem();
+            }
+           
 
             if (result != null && !result.isEmpty()) {
                 request.setAttribute("statuscode", Constants.HTTP_STATUS_SUCCESS);
-                out.write(new Gson().toJson(result));
+                out.write(result);
 
             } else {
                 request.setAttribute("statuscode", Constants.HTTP_STATUS_FAIL);

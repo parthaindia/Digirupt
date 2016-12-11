@@ -73,6 +73,28 @@ public class BillManager {
 
         return DBManager.getDB().getAll(Constants.ITEM_TABLE);
     }
+    public String getAllItem(String custom) throws Exception {
+
+        
+        String ar[]=custom.split(",");
+      String listJson=  DBManager.getDB().getAll(Constants.ITEM_TABLE);
+       List<Map> itemList = new Gson().fromJson(listJson, new TypeToken<List<Map>>() {
+        }.getType());
+        
+          List<Map<String,String>> resultList=new ArrayList();
+          for(Map mp:itemList){
+              
+           Map<String, String> resultMap = new HashMap<String, String>();
+        for (String st : ar) {
+            if (mp.containsKey(st)) {
+                resultMap.put(st, (String) mp.get(st));
+            }
+        }
+        resultList.add(resultMap);
+          }
+        return new Gson().toJson(resultList, new TypeToken<List>() {
+        }.getType());
+    }
 
     public String createBill(List<Item> itemList, String category) throws Exception {
         if (itemList == null || itemList.isEmpty() || category == null || category.equals("")) {
@@ -92,7 +114,24 @@ public class BillManager {
         }
         return DBManager.getDB().getByKey(Constants.BILL_TABLE, id);
     }
+    
+        public String getBill(String id, String custom) throws Exception {
+        if (id == null || id.equals("") || custom == null || custom.equals("")) {
+            return null;
+        }
+        String ary[] = custom.split(",");
+      
+        
+        
+        String resultJson = DBManager.getDB().getByKey(Constants.BILL_TABLE, id);
+        List<Map> itemList = new Gson().fromJson(resultJson, new TypeToken<List<Map>>() {
+        }.getType());
 
+        
+        Map<Object, String> itemmap = (Map<Object, String>) itemList.get(0);
+       return customJson(ary,itemmap);
+    }
+        
     public String getAllBillIds() throws Exception {
         return DBManager.getDB().getAll(Constants.BILL_TABLE);
     }

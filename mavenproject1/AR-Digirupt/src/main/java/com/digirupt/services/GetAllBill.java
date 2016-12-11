@@ -39,7 +39,7 @@ public class GetAllBill extends HttpServlet {
 
             if (result != null && !result.isEmpty()) {
                 request.setAttribute("statuscode", Constants.HTTP_STATUS_SUCCESS);
-                out.write(new Gson().toJson(result));
+                out.write(result);
 
             } else {
                 request.setAttribute("statuscode", Constants.HTTP_STATUS_FAIL);
