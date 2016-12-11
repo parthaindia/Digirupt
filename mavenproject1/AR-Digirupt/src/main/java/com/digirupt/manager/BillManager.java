@@ -119,17 +119,33 @@ public class BillManager {
         if (id == null || id.equals("") || custom == null || custom.equals("")) {
             return null;
         }
-        String ary[] = custom.split(",");
+        String ar[] = custom.split(",");
       
         
         
         String resultJson = DBManager.getDB().getByKey(Constants.BILL_TABLE, id);
-        List<Map> itemList = new Gson().fromJson(resultJson, new TypeToken<List<Map>>() {
+        List<Map> billList = new Gson().fromJson(resultJson, new TypeToken<List<Map>>() {
         }.getType());
 
         
-        Map<Object, String> itemmap = (Map<Object, String>) itemList.get(0);
-       return customJson(ary,itemmap);
+        Map bil =  billList.get(0);
+      List<Map> itemList=  (List<Map>) bil.get("itemList");
+          
+        
+          List<Map<String,String>> resultList=new ArrayList();
+          for(Map mp:itemList){
+              
+           Map<String, String> resultMap = new HashMap<String, String>();
+        for (String st : ar) {
+            if (mp.containsKey(st)) {
+                resultMap.put(st, (String) mp.get(st));
+                
+            }
+        }
+        resultList.add(resultMap);
+          }
+        return new Gson().toJson(resultList, new TypeToken<List>() {
+        }.getType());
     }
         
     public String getAllBillIds() throws Exception {
@@ -145,11 +161,11 @@ public class BillManager {
         List<Item> actualItemList = new ArrayList();
         Set<String> itemIdsSet = itemMap.keySet();
         for (String it : itemIdsSet) {
-            json = DBManager.getDB().getByKey("item", it);
+            json = DBManager.getDB().getByKey(Constants.ITEM_TABLE, it);
             System.out.println(json);
             List<Item> itemList = new Gson().fromJson(json, new TypeToken<List<Item>>() {
             }.getType());
-            itemList.get(0).setPrice(itemMap.get(it));
+            itemList.get(0).setQuantity(itemMap.get(it));
             actualItemList.addAll(itemList);
         }
         Bill bill = new Bill();

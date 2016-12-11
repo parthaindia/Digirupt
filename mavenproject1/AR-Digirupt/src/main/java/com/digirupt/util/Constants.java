@@ -41,7 +41,7 @@ public interface Constants {
     public static final String DBPORT = "27017";
     public static final String DBURL = "localhost";
 
-    public static final String ITEM_TABLE = "item";
-    public static final String BILL_TABLE = "bill";
+    public static final String ITEM_TABLE = "item1";
+    public static final String BILL_TABLE = "bill1";
 
 }

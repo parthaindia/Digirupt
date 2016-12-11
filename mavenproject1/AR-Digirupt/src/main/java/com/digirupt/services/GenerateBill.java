@@ -12,7 +12,9 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -38,13 +40,19 @@ public class GenerateBill extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
 
-            String json = request.getParameter("json");
-            String category = request.getParameter("category");
+            Map<String, String[]> jsonMap = request.getParameterMap();
+            Map<String,String> finalMap=new HashMap();
+//            String category = request.getParameter("category");
+            String category = "basic";
+            Set<String> keyList=jsonMap.keySet();
+            for(String str:keyList){
+            String[]arg=    jsonMap.get(str);
+            String result=arg[0];
+            finalMap.put(str, result);
+            }
+            
 
-            Map<String, String> itemList = new Gson().fromJson(json, new TypeToken<HashMap<String, String>>() {
-            }.getType());
-
-            String result = new BillManager().createBillIdBased(itemList, category);
+            String result = new BillManager().createBillIdBased(finalMap, category);
 
             if (result != null && !result.isEmpty()) {
                 request.setAttribute("statuscode", Constants.HTTP_STATUS_SUCCESS);

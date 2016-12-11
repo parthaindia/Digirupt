@@ -40,7 +40,7 @@ public class GetBill extends HttpServlet {
             String custom = request.getParameter("custom");
             String result = "";
             if (custom != null && !custom.isEmpty()) {
-                result = new BillManager().getItem(id, custom);
+                result = new BillManager().getBill(id, custom);
             } else {
                 result = new BillManager().getBill(id);
             }

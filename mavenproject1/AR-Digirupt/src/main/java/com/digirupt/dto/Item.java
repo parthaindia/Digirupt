@@ -18,6 +18,7 @@ public class Item {
     private String updatedate;
     private String price;
     private String categotry;
+    private String quantity;
 
     public Object getId() {
         return _id;
@@ -73,6 +74,14 @@ public class Item {
 
     public void setCategotry(String categotry) {
         this.categotry = categotry;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
     }
 
 }
