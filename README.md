@@ -30,23 +30,34 @@ http://localhost:8080/AR-Digirupt/GetItem?id=584292893f7abc0d4b027ba3
 
 id 
 
+
+
 1 paramter which the id returned while you save the item
+
+
+
+
+http://localhost:8080/AR-Digirupt/GetItem?id=584292893f7abc0d4b027ba3&custom=name,quanity
+
+set custom=The parameter which you want
+
 
 ----------------------------------------------------------------------
 Get all saved items
 
 http://localhost:8080/AR-Digirupt/GetAllItems
 
+http://localhost:8080/AR-Digirupt/GetAllItems&custom=name,quanity
+set custom=The parameter which you want
 
 ----------------------------------------------------------------------
 to generate bill
 
-http://localhost:8080/AR-Digirupt/GenerateBill?json={\"5841c3c5da9c37c320d4fac3\":\"1\",\"5841c3c5da9c37c320d4fac\":\"1\"}?category=basic
+http://localhost:8080/AR-Digirupt/GenerateBill?5841c3c5da9c37c320d4fac31&5841c3c5da9c37c320d4fac=1
 
-note:an actual json is sent the url wont work without a postman or a rest call
+send id as key quanity as value 
 
-{"5841c3c5da9c37c320d4fac3":"1"
-"5841c3c5da9c37c320d4fac":"2"}
+5841c3c5da9c37c320d4fac3=1&5841c3c5da9c37c320d4fac=2
 
 json must have a map with key being the item id and value being the number of items 
 
@@ -65,6 +76,8 @@ http://localhost:8080/AR-Digirupt/GetBill?id=
 id
 1 parameter to be given
 
+http://localhost:8080/AR-Digirupt/GetBill?id=454&custom=name,quanity
+set custom=The parameter which you want
 ------------------------------------------------------------------------
 
 to get all bill ids
